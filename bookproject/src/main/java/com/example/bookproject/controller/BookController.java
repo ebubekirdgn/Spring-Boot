@@ -1,8 +1,11 @@
 package com.example.bookproject.controller;
 
+import com.example.bookproject.dto.BookDTO;
 import com.example.bookproject.model.Book;
 import com.example.bookproject.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +20,11 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PostMapping("/save-book")
-    public String saveBook(@RequestBody Book book) {
-        bookService.saveBook(book);
-        return "Kitap başarıyla kaydedildi!";
-    }
+//    @PostMapping("/save-book")
+//    public String saveBook(@RequestBody Book book) {
+//        bookService.saveBook(book);
+//        return "Kitap başarıyla kaydedildi!";
+//    }
 
     @GetMapping("/book/{id}")
     public Book getBook(@PathVariable Long id) {
@@ -41,4 +44,14 @@ public class BookController {
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
     }
+
+    @PostMapping("/save-book")
+    public String saveBook(@RequestBody @Valid BookDTO bookDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "Validation Error: " + bindingResult.getAllErrors().toString();
+        }
+        bookService.saveBookFromDTO(bookDTO);
+        return "Kitap başarıyla kaydedildi!";
+    }
+
 }

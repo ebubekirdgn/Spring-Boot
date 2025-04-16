@@ -1,5 +1,6 @@
 package com.example.bookproject.service;
 
+import com.example.bookproject.dto.BookDTO;
 import com.example.bookproject.model.Book;
 import com.example.bookproject.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,12 @@ public class BookService {
                     return bookRepository.save(book);
                 })
                 .orElse(null);
+    }
+
+    public void saveBookFromDTO(BookDTO bookDTO) {
+        Book book = new Book(); // Book entity
+        book.setTitle(bookDTO.getTitle());
+        book.setAuthor(bookDTO.getAuthor());
+        bookRepository.save(book);
     }
 }
