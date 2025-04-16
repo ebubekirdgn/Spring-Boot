@@ -49,4 +49,8 @@ public class BookService {
         book.setAuthor(bookDTO.getAuthor());
         bookRepository.save(book);
     }
+
+    public List<Book> findBooksByTitle(String title) {
+        return bookRepository.findByTitleContaining(title);
+    }
 }

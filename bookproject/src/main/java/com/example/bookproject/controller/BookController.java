@@ -54,4 +54,9 @@ public class BookController {
         return "Kitap başarıyla kaydedildi!";
     }
 
+    @GetMapping("/find-books")
+    public List<Book> findBooksByTitle(@RequestParam String title) {
+        return bookService.findBooksByTitle(title);
+    }
+
 }
