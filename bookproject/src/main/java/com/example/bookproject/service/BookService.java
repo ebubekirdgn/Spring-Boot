@@ -3,8 +3,13 @@ package com.example.bookproject.service;
 import com.example.bookproject.dto.BookDTO;
 import com.example.bookproject.model.Book;
 import com.example.bookproject.repository.BookRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Service
@@ -53,4 +58,10 @@ public class BookService {
     public List<Book> findBooksByTitle(String title) {
         return bookRepository.findByTitleContaining(title);
     }
+
+    public Page<Book> getPaginatedBooks(int page, int size, String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return bookRepository.findAllBy(pageable);
+    }
+
 }

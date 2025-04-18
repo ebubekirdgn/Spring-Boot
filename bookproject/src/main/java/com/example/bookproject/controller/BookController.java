@@ -5,6 +5,7 @@ import com.example.bookproject.model.Book;
 import com.example.bookproject.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +58,15 @@ public class BookController {
     @GetMapping("/find-books")
     public List<Book> findBooksByTitle(@RequestParam String title) {
         return bookService.findBooksByTitle(title);
+    }
+
+    @GetMapping("/books-paginated")
+    public Page<Book> getPaginatedBooks(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
+        return bookService.getPaginatedBooks(page, size, sortBy);
     }
 
 }
