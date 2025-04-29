@@ -1,10 +1,10 @@
-package com.atm.atmproject;
+package com.hrproject.hrbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AtmProjectApplicationTests {
+class HrBackendApplicationTests {
 
     @Test
     void contextLoads() {
