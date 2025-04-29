@@ -18,7 +18,7 @@ public class Admin {
     private String username;  // Admin adı
     private String password;  // Admin şifresi
 
-    @OneToMany(mappedBy = "admin")  // Admin'e bağlı kullanıcılar
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)  // Admin'e bağlı kullanıcılar
     private List<User> users;  // Admin'e bağlı kullanıcılar
 
     // Diğer admin özellikleri eklenebilir
